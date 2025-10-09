@@ -1,0 +1,121 @@
+<div class="bg-light text-dark">
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container">
+      <a class="navbar-brand fw-bold" href="/">Home</a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ms-auto">
+          <li class="nav-item"><a class="nav-link" href="#about">About</a></li>
+          <li class="nav-item"><a class="nav-link" href="#projects">Projects</a></li>
+          <li class="nav-item"><a class="nav-link" href="#skills">Skills</a></li>
+          <li class="nav-item"><a class="nav-link" href="#contact">Contact</a></li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+  <div class="container mt-5">
+    <section id="about" class="text-center mb-5">
+      <%= image_tag "cvimage.jpg",
+      class: "mb-3 shadow",
+      style: "width: 120px; height: 120px; border-radius: 50%; object-fit: cover;" %>
+      <h1 class="fw-bold">Tín Ngô</h1>
+      <p class="text-muted">Software Developer @ FPT Software Nha Trang</p>
+      <p>Passionate about building scalable web applications and IoT solutions.</p>
+    </section>
+    <hr>
+    <section id="skills" class="mb-5">
+      <h2 class="fw-bold mb-3 text-center">Skills</h2>
+      <div class="row text-center">
+        <div class="col-md-3 mb-3"><span class="badge bg-primary">Ruby on Rails</span></div>
+        <div class="col-md-3 mb-3"><span class="badge bg-success">JavaScript</span></div>
+        <div class="col-md-3 mb-3"><span class="badge bg-info text-dark">C++</span></div>
+        <div class="col-md-3 mb-3"><span class="badge bg-warning text-dark">Git / GitHub</span></div>
+      </div>
+    </section>
+    <hr>
+    <section id="projects" class="mb-5">
+      <h2 class="fw-bold text-center mb-4">Projects</h2>
+      <div class="row g-4">
+        <!-- Full Stack Chat App -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">💬 Full Stack Chat App</h5>
+              <p class="card-text flex-grow-1">
+                Real-time messaging web app built with modern full-stack technologies.  
+                Includes authentication, private/group chats, and responsive UI.
+              </p>
+              <div class="mt-auto">
+                <a href="https://github.com/ngotrongtin/TextingApp_BE" target="_blank" class="btn btn-outline-dark btn-sm me-2">
+                  Backend
+                </a>
+                <a href="https://github.com/ngotrongtin/TextingApp-FE" target="_blank" class="btn btn-outline-dark btn-sm">
+                  Frontend
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- E-Commerce Web App -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">🛍️ E-Commerce Web App</h5>
+              <p class="card-text flex-grow-1">
+                Full-featured e-commerce platform with product management,  
+                user authentication, and shopping cart functionality.
+              </p>
+              <div class="mt-auto">
+                <a href="https://github.com/ngotrongtin/webbanhang-2.0" target="_blank" class="btn btn-outline-dark btn-sm">
+                  View on GitHub
+                </a>
+              </div>
+            </div>
+          </div>
+        </div>
+        <!-- Smart Home IoT Project -->
+        <div class="col-md-6 col-lg-4">
+          <div class="card shadow-sm h-100">
+            <div class="card-body d-flex flex-column">
+              <h5 class="card-title">🏠 Smart Home IoT Project</h5>
+              <p class="card-text flex-grow-1">
+                Home automation system with real-time sensor data and  
+                device control using MQTT and web dashboard integration.  
+                Source code available on request.
+              </p>
+              <div class="mt-auto">
+                <button class="btn btn-outline-secondary btn-sm" disabled>Source on Request</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+    <hr>
+    <section id="contact" class="text-center py-5 bg-light rounded-4 shadow-sm">
+      <h2 class="fw-bold mb-4">Contact</h2>
+      <p class="mb-2">
+        <i class="bi bi-envelope-fill me-2"></i>
+        <a href="mailto:tinzdev986@gmail.com" class="text-decoration-none text-dark fw-semibold">
+          tinzdev986@gmail.com
+        </a>
+      </p>
+      <div class="d-flex justify-content-center gap-4 mt-4">
+        <a href="https://www.facebook.com/tin.ngotrong.332/" target="_blank" class="text-dark fs-4">
+          <i class="bi bi-facebook"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/t%C3%ADn-ng%C3%B4-694aaa29b/" target="_blank" class="text-dark fs-4">
+          <i class="bi bi-linkedin"></i>
+        </a>
+        <a href="https://github.com/ngotrongtin" target="_blank" class="text-dark fs-4">
+          <i class="bi bi-github"></i>
+        </a>
+      </div>
+    </section>
+  </div>
+  <footer class="text-center mt-5 py-4 bg-dark text-light">
+    <p>© <%= Time.now.year %> Tín Ngô — Built with Ruby on Rails</p>
+  </footer>
+</div>
