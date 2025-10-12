@@ -7,4 +7,8 @@ class HomeController < ApplicationController
     def contact
               
     end
+
+    def document
+        render template: "document/index"
+    end
 end
