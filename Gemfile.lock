@@ -107,6 +107,18 @@ GEM
     jbuilder (2.14.1)
       actionview (>= 7.0.0)
       activesupport (>= 7.0.0)
+    kaminari (1.2.2)
+      activesupport (>= 4.1.0)
+      kaminari-actionview (= 1.2.2)
+      kaminari-activerecord (= 1.2.2)
+      kaminari-core (= 1.2.2)
+    kaminari-actionview (1.2.2)
+      actionview
+      kaminari-core (= 1.2.2)
+    kaminari-activerecord (1.2.2)
+      activerecord
+      kaminari-core (= 1.2.2)
+    kaminari-core (1.2.2)
     logger (1.7.0)
     loofah (2.24.1)
       crass (~> 1.0.2)
@@ -121,6 +133,7 @@ GEM
     method_source (1.1.0)
     mini_mime (1.1.5)
     minitest (5.25.5)
+    mqtt (0.6.0)
     msgpack (1.8.0)
     net-imap (0.5.11)
       date
@@ -183,6 +196,7 @@ GEM
     rdoc (6.14.2)
       erb
       psych (>= 4.0.0)
+    redis (4.8.1)
     regexp_parser (2.11.3)
     reline (0.6.2)
       io-console (~> 0.5)
@@ -240,10 +254,13 @@ DEPENDENCIES
   htmlbeautifier
   importmap-rails
   jbuilder
+  kaminari
   logger
+  mqtt
   pg
   puma (~> 5.0)
   rails (~> 7.0.8, >= 7.0.8.6)
+  redis (~> 4.0)
   selenium-webdriver
   sprockets-rails
   stimulus-rails

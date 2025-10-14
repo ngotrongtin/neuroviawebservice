@@ -1,0 +1,3 @@
+class MqttMessage < ApplicationRecord
+  
+end

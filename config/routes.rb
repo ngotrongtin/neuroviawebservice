@@ -1,7 +1,8 @@
 Rails.application.routes.draw do
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
-
-  # Defines the root path route ("/")
+  # Mqtt routes
+  get '/mqtt_messages', to: 'mqtt_messages#index'
+  get 'mqtt_messages/show'
+  # Home routes
   root "home#index"
   get '/contact', to: 'home#contact'
   get '/document', to: 'home#document'

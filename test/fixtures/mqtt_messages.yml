@@ -1,0 +1,13 @@
+# Read about fixtures at https://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  topic: MyString
+  payload: MyText
+  qos: 1
+  received_at: 2025-10-13 10:38:10
+
+two:
+  topic: MyString
+  payload: MyText
+  qos: 1
+  received_at: 2025-10-13 10:38:10
