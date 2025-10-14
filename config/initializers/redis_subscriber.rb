@@ -7,13 +7,19 @@ Thread.new do
     on.message do |channel, message|
       Rails.logger.info "[Redis] Received on #{channel}: #{message}"
 
-      msg = MqttMessage.find_by(id: message)
-      Turbo::StreamsChannel.broadcast_prepend_to(
-        "mqtt_messages",
-        target: "messages",
-        partial: "mqtt_messages/message",
-        locals: { message: msg } 
-      )
+      message_record = MqttMessage.order(received_at: :desc).first
+
+      if message_record
+        Turbo::StreamsChannel.broadcast_prepend_to(
+          "mqtt_messages",
+          target: "messages",
+          partial: "mqtt_messages/message",
+          locals: { message: message_record }
+        )
+        Rails.logger.info "[Redis] Broadcasted message #{message_record.id}"
+      else
+        Rails.logger.warn "[Redis] No message record found to broadcast"
+      end
     end
   end
 end
