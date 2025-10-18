@@ -1,7 +1,5 @@
 development:
-  adapter: redis
-  url: <%= Rails.application.credentials.redis_url %>
-  channel_prefix: serviceServer_development
+  adapter: async
 
 test:
   adapter: test
