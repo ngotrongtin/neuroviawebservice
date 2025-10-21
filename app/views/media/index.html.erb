@@ -1,0 +1,79 @@
+<div class="stream-container">
+  <!-- Video Streaming -->
+  <div class="stream-card video-stream">
+    <h2>Video Streaming</h2>
+    <div class="video-wrapper">
+      <video
+        src="https://www.w3schools.com/html/mov_bbb.mp4"
+        controls
+        autoplay
+        muted
+        playsinline
+      ></video>
+    </div>
+  </div>
+
+  <!-- Image Streaming -->
+  <div class="stream-card image-stream">
+    <h2>Image Streaming</h2>
+    <div class="image-wrapper">
+      <img
+        src="https://placekitten.com/800/450"
+        alt="Image Stream"
+        id="imageStream"
+      />
+    </div>
+  </div>
+</div>
+
+<style>
+  .stream-container {
+    display: grid;
+    grid-template-columns: 2fr 1fr;
+    gap: 20px;
+    margin-top: 20px;
+  }
+
+  .stream-card {
+    background: #111827;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    color: #f1f5f9;
+  }
+
+  .stream-card h2 {
+    font-size: 1.1rem;
+    margin-bottom: 10px;
+    color: #93c5fd;
+  }
+
+  .video-wrapper,
+  .image-wrapper {
+    border-radius: 10px;
+    overflow: hidden;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  video {
+    width: 100%;
+    height: auto;
+    display: block;
+  }
+
+  img#imageStream {
+    width: 100%;
+    height: auto;
+    display: block;
+    object-fit: cover;
+  }
+
+  @media (max-width: 900px) {
+    .stream-container {
+      grid-template-columns: 1fr;
+    }
+  }
+</style>

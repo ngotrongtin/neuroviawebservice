@@ -7,4 +7,5 @@ Rails.application.routes.draw do
   # service routes
   get '/services', to: 'services#index'
   get '/dashboard/monitoring', to: 'mqtt_messages#index'
+  get '/dashboard/mediastreaming', to: 'media#index'
 end
