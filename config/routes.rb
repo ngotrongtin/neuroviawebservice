@@ -6,6 +6,6 @@ Rails.application.routes.draw do
   get '/architect', to: 'document#architect'
   # service routes
   get '/services', to: 'services#index'
-  get '/dashboard/monitoring', to: 'mqtt_messages#index'
+  get '/dashboard/monitoring', to: 'mqtt_messages#index', as: 'mqtt_messages'
   get '/dashboard/mediastreaming', to: 'media#index'
 end
