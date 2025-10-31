@@ -1,4 +1,4 @@
-ID,Topic,Payload,QoS,Received At
+ID,Topic,Payload,Received At
 <% @messages.each do |msg| %>
-<%= msg.id %>,<%= msg.topic %>,<%= msg.payload.to_s.gsub(',', ' ') %>,<%= msg.qos %>,<%= msg.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
+<%= msg.id %>,<%= msg.topic %>,<%= msg.payload.to_s.gsub(',', ' ') %>,<%= msg.created_at.strftime('%Y-%m-%d %H:%M:%S') %>
 <% end %>
