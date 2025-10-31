@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Admin Dashboard</title>
+    <%= csrf_meta_tags %>
+    <%= csp_meta_tag %>
+    <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+    <%= javascript_include_tag "application", "data-turbo-track": "reload", defer: true %>
+    <!-- Font Awesome CDN -->
+    <script src="https://kit.fontawesome.com/a2b5e1b6a7.js" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">
+  </head>
+
+  <body class="bg-light">
+    <i class="fa-solid fa-bars"></i>
+    </button>
+    <div class="d-flex">
+      <!-- Sidebar -->
+      <%= render "admin/layouts/sidebar" %>
+
+      <!-- Main Content -->
+      <main class="flex-grow-1 p-4" style="margin-left: 250px;">
+        <%= yield %>
+      </main>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+  </body>
+</html>

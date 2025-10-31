@@ -1,0 +1,26 @@
+<div class="container">
+  <h2>MQTT Messages (Auto-Update)</h2>
+
+  <%= turbo_stream_from "mqtt_messages" %>
+
+  <div class="d-flex justify-content-end mb-3">
+    <%= link_to "Export CSV", admin_iot_mqtt_monitor_index_path(format: :csv), class: "btn btn-success" %>
+  </div>
+  <table class="table table-striped">
+    <thead class="table-dark">
+      <tr>
+        <th>ID</th>
+        <th>Topic</th>
+        <th>Payload</th>
+        <th>Received At</th>
+      </tr>
+    </thead>
+    <tbody id="messages">
+      <%= render partial: "message", collection: @messages, as: :message %>
+    </tbody>
+  </table>
+
+  <div class="d-flex justify-content-center mt-3">
+    <%= paginate @messages, theme: 'bootstrap4' %>
+  </div>
+</div>
