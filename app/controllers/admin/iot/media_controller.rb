@@ -1,4 +1,4 @@
-class Admin::MediaController < ApplicationController
+class Admin::MediaController < Admin::BaseController
     def index
               
     end

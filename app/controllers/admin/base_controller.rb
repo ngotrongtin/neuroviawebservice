@@ -1,8 +1,11 @@
 class Admin::BaseController < ApplicationController
   layout 'admin'  
-  # before_action :authenticate_user!
-  # before_action :verify_admin
+  before_action :authenticate_user!
+  before_action :verify_admin
+  protected
 
+  MAX_QUERY_LENGTH = 200
+  
   private
 
   def verify_admin

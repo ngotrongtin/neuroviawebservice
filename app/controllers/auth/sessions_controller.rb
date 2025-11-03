@@ -21,7 +21,7 @@ class Auth::SessionsController < Devise::SessionsController
 
   # Sau khi đăng nhập xong thì redirect đến đâu
   def after_sign_in_path_for(resource)
-    user_home_path # hoặc root_path tuỳ app của bạn
+    admin_root_path # hoặc root_path tuỳ app của bạn
   end
 
   # Sau khi đăng xuất

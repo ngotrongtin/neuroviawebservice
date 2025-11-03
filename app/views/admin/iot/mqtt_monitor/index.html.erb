@@ -3,24 +3,34 @@
 
   <%= turbo_stream_from "mqtt_messages" %>
 
-  <div class="d-flex justify-content-end mb-3">
+  <!-- 🔍 Search Form -->
+  <div class="d-flex justify-content-between mb-3">
+    <%= form_with url: admin_iot_mqtt_monitor_index_path, method: :get, data: { turbo_frame: "mqtt_messages_frame" }, class: "d-flex gap-2" do |f| %>
+      <%= f.text_field :topic, value: params[:topic], class: "form-control", placeholder: "topic..." %>
+      <%= f.text_field :payload, value: params[:payload], class: "form-control", placeholder: "payload..." %>
+      <%= f.submit "Search", class: "btn btn-primary" %>
+    <% end %>
+
     <%= link_to "Export CSV", admin_iot_mqtt_monitor_index_path(format: :csv), class: "btn btn-success" %>
   </div>
-  <table class="table table-striped">
-    <thead class="table-dark">
-      <tr>
-        <th>ID</th>
-        <th>Topic</th>
-        <th>Payload</th>
-        <th>Received At</th>
-      </tr>
-    </thead>
-    <tbody id="messages">
-      <%= render partial: "message", collection: @messages, as: :message %>
-    </tbody>
-  </table>
 
-  <div class="d-flex justify-content-center mt-3">
-    <%= paginate @messages, theme: 'bootstrap4' %>
-  </div>
+  <turbo-frame id="mqtt_messages_frame">
+    <table class="table table-striped">
+      <thead class="table-dark">
+        <tr>
+          <th>ID</th>
+          <th>Topic</th>
+          <th>Payload</th>
+          <th>Received At</th>
+        </tr>
+      </thead>
+      <tbody id="messages">
+        <%= render partial: "message", collection: @messages, as: :message %>
+      </tbody>
+    </table>
+
+    <div class="d-flex justify-content-center mt-3">
+      <%= paginate @messages, theme: 'bootstrap4' %>
+    </div>
+  </turbo-frame>
 </div>

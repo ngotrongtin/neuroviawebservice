@@ -13,7 +13,7 @@ Thread.new do
         Turbo::StreamsChannel.broadcast_prepend_to(
           "mqtt_messages",
           target: "messages",
-          partial: "mqtt_messages/message",
+          partial: "admin/iot/mqtt_monitor/message",
           locals: { message: message_record }
         )
         Rails.logger.info "[Redis] Broadcasted message #{message_record.id}"

@@ -35,10 +35,10 @@
         <span class="text-secondary text-uppercase small ps-2">User Management</span>
     </li>
     <li>
-    <a href="/admin/fake_users" class="nav-link text-white d-flex align-items-center">
+      <%= link_to admin_users_path, class: "nav-link text-white d-flex align-items-center" do %>
         <i class="fa-solid fa-users me-2"></i>
         Users
-    </a>
+      <% end %>
     </li>
 
     <!-- Statistics -->
@@ -62,8 +62,9 @@
   <hr>
   <!-- Logout -->
   <div class="dropdown">
-    <%= link_to destroy_user_session_path, method: :delete, class: "btn btn-outline-danger w-100 text-start" do %>
-      <i class="fa-solid fa-right-from-bracket me-2"></i> Logout
-    <% end %>
+    <%= button_to destroy_user_session_path, method: :delete, class: "btn btn-outline-danger w-100 text-start d-flex align-items-center" do %>
+    <i class="fa-solid fa-right-from-bracket me-2"></i>
+    Logout
+  <% end %>
   </div>
 </nav>
