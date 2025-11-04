@@ -16,7 +16,7 @@ Rails.application.routes.draw do
   namespace :admin do
     root "dashboard#index"
 
-    resources :users
+    resources :users, only: [:index, :update, :destroy]
     namespace :iot do
       resources :mqtt_monitor, only: [:index, :show]
       resources :media_monitor, only: [:index]
