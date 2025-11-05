@@ -9,9 +9,12 @@ Rails.application.routes.draw do
   # === Authentication
   devise_for :users, controllers: {
     sessions: 'auth/sessions',
-    registrations: 'auth/registrations'
+    registrations: 'auth/registrations',
+    passwords: 'auth/passwords'
   }
-
+  namespace :auth do
+    get '/oauth2callback', to: 'oauth#callback'
+  end
   # === Admin namespace ===
   namespace :admin do
     root "dashboard#index"

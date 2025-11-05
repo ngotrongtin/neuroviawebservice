@@ -30,6 +30,8 @@
 !/tmp/storage/.keep
 
 /public/assets
-
+/scripts
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+
+/config/google_oauth_credentials.json

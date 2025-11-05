@@ -49,6 +49,12 @@ gem "bootsnap", require: false
 gem 'mqtt'        # ruby-mqtt client
 
 gem 'devise'
+
+# Google auth
+gem 'google-api-client', '~> 0.53.0'
+gem 'googleauth', '~> 1.8.1'
+gem 'mail'
+
 # Use Sass to process CSS
 # gem "sassc-rails"
 
