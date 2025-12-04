@@ -31,4 +31,14 @@ Rails.application.routes.draw do
     #   get 'revenue', to: 'revenue#index'
     # end
   end
+  
+  # API for mobile clients (JWT)
+  namespace :api do
+    namespace :v1 do
+      post 'login', to: 'sessions#create'
+      delete 'logout', to: 'sessions#destroy'
+      post 'refresh', to: 'tokens#create'
+      get 'profile', to: 'profiles#show'
+    end
+  end
 end

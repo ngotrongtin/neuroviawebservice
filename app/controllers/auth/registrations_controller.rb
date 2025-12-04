@@ -6,13 +6,13 @@ class Auth::RegistrationsController < Devise::RegistrationsController
 
   protected
 
-  # Cho phép thêm field mới khi đăng ký
+  # Allow additional fields during sign up
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:name])
     devise_parameter_sanitizer.permit(:account_update, keys: [:name])
   end
 
-  # Redirect sau khi đăng ký
+  # Redirect after sign up
   def after_sign_up_path_for(resource)
     root_path
   end

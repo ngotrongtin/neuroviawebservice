@@ -35,3 +35,4 @@
 /config/master.key
 
 /config/google_oauth_credentials.json
+.github/*
