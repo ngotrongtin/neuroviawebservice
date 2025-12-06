@@ -1,0 +1,133 @@
+  <div class="container py-4">
+    <header class="mb-4">
+      <h1 class="fw-bold h2">Backend Architecture — Ruby on Rails + MQTT Client + Redis</h1>
+      <p class="text-muted">
+        This document describes the backend architecture, data flow, and operational details for a system built with
+        <strong>Ruby on Rails</strong> (RESTful API), a background <strong>MQTT client</strong>, and <strong>Redis</strong> as an inter-process data broker.
+      </p>
+    </header>
+
+  <section class="mb-4">
+    <h2 class="h4 fw-bold">1. System Overview</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item"><strong>Ruby on Rails</strong>: provides RESTful API services for web and mobile clients.</li>
+      <li class="list-group-item"><strong>MQTT client (background process)</strong>: a standalone process that maintains a persistent connection to the MQTT broker and listens to relevant topics.</li>
+      <li class="list-group-item"><strong>Redis</strong>: acts as an intermediate message broker / cache to transfer data from the MQTT client to the Rails application.</li>
+      <li class="list-group-item"><strong>Rails worker thread</strong>: a background thread or worker that connects to Redis and continuously consumes data pushed by the MQTT client.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h4 fw-bold">2. Components</h2>
+
+    <div class="card mb-3 shadow-sm border-0">
+      <div class="card-body">
+        <h3 class="h5 fw-bold">2.1 RESTful API (Ruby on Rails)</h3>
+        <ul class="mb-0">
+          <li>Standard RESTful endpoints for resource management (e.g., <code>/api/v1/devices</code>, <code>/api/v1/telemetry</code>).</li>
+          <li>Handles authentication, authorization, validation, and logging.</li>
+          <li>Reads real-time data from Redis or persistent data from the database when required.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm border-0">
+      <div class="card-body">
+        <h3 class="h5 fw-bold">2.2 MQTT Client (Background Process)</h3>
+        <ul class="mb-0">
+          <li>Runs as an independent process (written in Ruby, Python, or another suitable language).</li>
+          <li>Maintains a persistent connection to the MQTT broker.</li>
+          <li>Subscribes to one or more topics (e.g., <code>devices/+/telemetry</code>).</li>
+          <li>On message receipt: parses and validates the payload, then pushes it to Redis.</li>
+          <li>Implements automatic reconnect, retry with backoff, and MQTT QoS handling as needed.</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card mb-3 shadow-sm border-0">
+      <div class="card-body">
+        <h3 class="h5 fw-bold">2.3 Redis</h3>
+        <ul class="mb-0">
+          <li>Used as a message broker and in-memory data store between the MQTT client and Rails server.</li>
+          <li>Common patterns include:
+            <ul>
+              <li><strong>Publish / Subscribe</strong>: MQTT client publishes to a Redis channel; Rails subscribes for real-time processing.</li>
+              <li><strong>List-based queues</strong> (LPUSH / BRPOP): ensures ordered, sequential processing.</li>
+              <li><strong>Redis Streams</strong>: supports message persistence, replay, and consumer groups.</li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h4 fw-bold">3. Data Flow</h2>
+    <ol class="ps-3">
+      <li>Devices or data producers send messages to the <em>MQTT broker</em>.</li>
+      <li>The MQTT client receives messages by subscribing to relevant topics.</li>
+      <li>The MQTT client pushes messages into Redis (e.g., <code>LPUSH telemetry:queue</code> or <code>PUBLISH telemetry:channel</code>).</li>
+      <li>A Rails background worker consumes data from Redis and processes it (e.g., persist to database, update cache, trigger events).</li>
+      <li>API clients retrieve processed data via RESTful endpoints or real-time channels (WebSocket / SSE, if implemented).</li>
+    </ol>
+
+    <div class="alert alert-info" role="alert">
+      <strong>Note:</strong> Choose the Redis pattern (Pub/Sub, Lists, or Streams) based on ordering guarantees, durability, and replay requirements.
+    </div>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h4 fw-bold">4. Concurrency & Resilience</h2>
+    <ul class="list-unstyled">
+      <li class="mb-2">• Rails consumes Redis messages using background threads or job processors (e.g., Sidekiq, ActiveJob).</li>
+      <li class="mb-2">• Workers should be fault-tolerant: catch exceptions, log failures, and retry with exponential backoff.</li>
+      <li class="mb-2">• The MQTT client must handle automatic reconnection and transient broker or network failures.</li>
+      <li class="mb-2">• Rate limiting, batching, and backpressure should be considered for high-throughput message flows.</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h4 fw-bold">5. Technical Flow Example</h2>
+    <div class="card border-0 shadow-sm">
+      <div class="card-body">
+        <pre class="mb-0"><code># MQTT client (pseudocode)
+connect_to_broker()
+subscribe('devices/+/telemetry')
+for each message:
+  parsed = parse(message)
+  redis.lpush('telemetry:queue', serialize(parsed))
+
+# Rails worker (pseudocode)
+loop do
+  item = redis.brpop('telemetry:queue', timeout: 0)
+  process(item)
+  # persist to DB / update cache / emit events
+end
+</code></pre>
+      </div>
+    </div>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h4 fw-bold">6. Operations & Security</h2>
+    <ul class="list-group list-group-flush">
+      <li class="list-group-item">Secure MQTT connections using TLS and broker authentication.</li>
+      <li class="list-group-item">Deploy Redis in a private network and enforce authentication and ACLs.</li>
+      <li class="list-group-item">Apply least-privilege access for the MQTT client (restricted Redis keys/streams).</li>
+      <li class="list-group-item">Enable structured logging, health checks, and monitoring (e.g., Prometheus, Grafana).</li>
+    </ul>
+  </section>
+
+  <section class="mb-4">
+    <h2 class="h4 fw-bold">7. Recommendations</h2>
+    <ul class="list-unstyled">
+      <li class="mb-2">• Use <strong>Redis Streams</strong> when message ordering, durability, and replay are required.</li>
+      <li class="mb-2">• For very high throughput and long-term persistence, consider a dedicated message broker such as Kafka.</li>
+      <li class="mb-2">• Load-test the MQTT → Redis → Rails pipeline to identify bottlenecks and tune batching and concurrency.</li>
+    </ul>
+  </section>
+
+  <footer class="text-muted">
+    <p class="small">This document can be extended with architecture or sequence diagrams if needed.</p>
+  </footer>
+</div>

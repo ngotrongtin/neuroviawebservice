@@ -5,6 +5,9 @@ Rails.application.routes.draw do
   get '/contact', to: 'home#contact'
   get '/document', to: 'home#document'
   get '/architect', to: 'document#architect'
+  get '/server', to: 'document#server'
+  get '/frontend', to: 'document#frontend'
+  get '/firmware', to: 'document#firmware'
 
   # === Authentication
   devise_for :users, controllers: {

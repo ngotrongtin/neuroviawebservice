@@ -1,1 +1,76 @@
-<a href="/architect">Neurovia Architecture</a>
+<style>
+	.doc-nav {
+		display: grid;
+		grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+		gap: 16px;
+		margin: 24px 0;
+	}
+	.doc-card {
+		display: block;
+		padding: 16px 18px;
+		border-radius: 12px;
+		background: #f8fafc;
+		border: 1px solid #e5e7eb;
+		text-decoration: none;
+		color: #111827;
+		transition: transform .12s ease, box-shadow .12s ease, background .12s ease;
+	}
+	.doc-card:hover {
+		transform: translateY(-2px);
+		box-shadow: 0 6px 16px rgba(0,0,0,0.08);
+		background: #ffffff;
+	}
+	.doc-title {
+		font-weight: 600;
+		margin: 0 0 6px 0;
+		font-size: 1.05rem;
+	}
+	.doc-desc {
+		margin: 0;
+		color: #4b5563;
+		font-size: .92rem;
+	}
+	.doc-header {
+		display: flex;
+		align-items: baseline;
+		justify-content: space-between;
+		gap: 12px;
+		border-bottom: 1px solid #e5e7eb;
+		padding-bottom: 10px;
+		margin-bottom: 18px;
+	}
+	.doc-header h1 {
+		margin: 0;
+		font-size: 1.35rem;
+		font-weight: 700;
+		color: #0f172a;
+	}
+	.doc-breadcrumb {
+		font-size: .9rem;
+		color: #6b7280;
+	}
+</style>
+
+<div class="doc-header">
+	<h1>Documentation</h1>
+	<div class="doc-breadcrumb">Home / Docs</div>
+ </div>
+
+<div class="doc-nav">
+	<a class="doc-card" href="/architect">
+		<div class="doc-title">Architecture</div>
+		<p class="doc-desc">Big-picture system overview and data flow.</p>
+	</a>
+	<a class="doc-card" href="/server">
+		<div class="doc-title">Server</div>
+		<p class="doc-desc">Rails backend, services, and integrations.</p>
+	</a>
+	<a class="doc-card" href="/firmware">
+		<div class="doc-title">Firmware</div>
+		<p class="doc-desc">IoT device and MQTT message formats.</p>
+	</a>
+	<a class="doc-card" href="/controller_device">
+		<div class="doc-title">Controller Device</div>
+		<p class="doc-desc">Details about the controller device and its interactions.</p>
+	</a>
+</div>
